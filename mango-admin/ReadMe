@@ -1,0 +1,6 @@
+问题一：
+	MyBatis plus代码生成器生成实体中日期类型为LocalDateTime，执行查询语句会报错，需手工修改为Date
+	查找方法看代码生成器怎么对字段类型进行控制
+问题二：
+	swagger2配置之后访问总是404，查看了包下面的swagger-ui.html没有内容
+	
