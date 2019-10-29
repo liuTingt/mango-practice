@@ -22,4 +22,12 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
 	 * @return
 	 */
 	List<SysUser> findAll(); 
+	
+	/***
+	 * 
+	 * @Description 
+	 *	分页查询
+	 * @return
+	 */
+	List<SysUser> findPage();
 }

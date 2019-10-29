@@ -4,3 +4,6 @@
 问题二：
 	swagger2配置之后访问总是404，查看了包下面的swagger-ui.html没有内容
 	
+	
+	
+MyBatis Plus的AR（ActiveRecord）模式。即实体类继承Model<实体类>，可直接使用实体类进行基本的CRUD和分页查询操作。

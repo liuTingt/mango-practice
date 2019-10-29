@@ -80,11 +80,11 @@
 		</dependency>
 		
 		<!-- 模板引擎依赖（默认） -->
-		<dependency>
+		<!-- <dependency>
 		    <groupId>org.apache.velocity</groupId>
 		    <artifactId>velocity-engine-core</artifactId>
 		    <version>2.1</version>
-		</dependency>
+		</dependency> -->
 		
 		<!-- freemarker模板引擎依赖 -->
 		<dependency>
@@ -112,6 +112,7 @@
 			<artifactId>mango-core</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		
 		
 	</dependencies>
 

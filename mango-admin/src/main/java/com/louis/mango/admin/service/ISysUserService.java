@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.louis.mango.admin.model.SysUser;
+import com.louis.mango.core.service.CurdService;
 
 /**
  * <p>
@@ -13,7 +14,7 @@ import com.louis.mango.admin.model.SysUser;
  * @author ltt
  * @since 2019-10-19
  */
-public interface ISysUserService extends IService<SysUser> {
+public interface ISysUserService extends IService<SysUser> , CurdService<SysUser>{
 
 	/***
 	 * 
@@ -32,4 +33,5 @@ public interface ISysUserService extends IService<SysUser> {
 	 * @return
 	 */
 	List<SysUser> findAll2();
+	
 }

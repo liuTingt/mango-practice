@@ -1,14 +1,17 @@
 package com.louis.mango.admin.service.ipml;
 
-import com.louis.mango.admin.dao.SysUserMapper;
-import com.louis.mango.admin.model.SysUser;
-import com.louis.mango.admin.service.ISysUserService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.louis.mango.admin.dao.SysUserMapper;
+import com.louis.mango.admin.model.SysUser;
+import com.louis.mango.admin.service.ISysUserService;
+import com.louis.mango.core.page.MyBatisPageHelper;
+import com.louis.mango.core.page.PageRequest;
+import com.louis.mango.core.page.PageResult;
 
 /**
  * <p>
@@ -36,6 +39,11 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 			System.out.println(sysUser.getName());
 		}
 		return list;
+	}
+
+	@Override
+	public PageResult findPage(PageRequest pageRequest) {
+		return MyBatisPageHelper.findPage(pageRequest, sysUserMapper);
 	}
 
 	
