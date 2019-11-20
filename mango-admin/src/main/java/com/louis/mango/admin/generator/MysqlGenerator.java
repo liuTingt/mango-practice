@@ -137,7 +137,7 @@ public class MysqlGenerator {
         // 写于父类中的公共字段
         //strategy.setSuperEntityColumns("id");
         // 生成bean的数据库表名
-        strategy.setInclude(new String[] {"sys_dept"});
+        strategy.setInclude(new String[] {"sys_config"});
         // 驼峰转 连字符
         strategy.setControllerMappingHyphenStyle(true);
         //strategy.setTablePrefix(pc.getModuleName() + "_");

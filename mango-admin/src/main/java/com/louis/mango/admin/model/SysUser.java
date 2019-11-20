@@ -1,11 +1,14 @@
 package com.louis.mango.admin.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 
 import io.swagger.annotations.ApiModel;
@@ -78,5 +81,15 @@ public class SysUser implements Serializable {
     @ApiModelProperty(value = "是否删除  -1：已删除  0：正常")
     private Integer delFlag;
 
+    // 额外字段
+    @TableField(exist = false)
+    private String deptName;// 部门名称
+
+    @TableField(exist = false)
+    private String roleNames;
+
+    @TableField(exist = false)
+    private List<SysUserRole> userRoles = new ArrayList<SysUserRole>();
+    
 
 }

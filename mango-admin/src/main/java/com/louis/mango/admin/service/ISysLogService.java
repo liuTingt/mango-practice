@@ -1,7 +1,9 @@
 package com.louis.mango.admin.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.louis.mango.admin.model.SysLog;
+import com.louis.mango.core.page.PageRequest;
 
 /**
  * <p>
@@ -13,4 +15,12 @@ import com.louis.mango.admin.model.SysLog;
  */
 public interface ISysLogService extends IService<SysLog> {
 
+	/***
+	 * 
+	 * @Description 
+	 *	分页查询
+	 * @param pageRequest
+	 * @return
+	 */
+	IPage<SysLog> findPage(PageRequest pageRequest);
 }

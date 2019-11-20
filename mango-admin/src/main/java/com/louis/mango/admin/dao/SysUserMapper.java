@@ -3,6 +3,7 @@ package com.louis.mango.admin.dao;
 import java.util.List;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.louis.mango.admin.model.SysUser;
 
 /**
@@ -30,4 +31,13 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
 	 * @return
 	 */
 	List<SysUser> findPage();
+	
+	/****
+	 * 
+	 * @Description 
+	 *	查询扩展后的用户信息
+	 * @param page
+	 * @return
+	 */
+	List<SysUser> getExtendPage(Page<SysUser> page);
 }

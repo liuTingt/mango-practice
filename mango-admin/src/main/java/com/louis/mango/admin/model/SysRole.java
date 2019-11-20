@@ -1,9 +1,11 @@
 package com.louis.mango.admin.model;
 
+import java.io.Serializable;
+import java.util.Date;
+
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
-import java.io.Serializable;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -40,13 +42,13 @@ public class SysRole implements Serializable {
     private String createBy;
 
     @ApiModelProperty(value = "创建时间")
-    private LocalDateTime createTime;
+    private Date createTime;
 
     @ApiModelProperty(value = "更新人")
     private String lastUpdateBy;
 
     @ApiModelProperty(value = "更新时间")
-    private LocalDateTime lastUpdateTime;
+    private Date lastUpdateTime;
 
     @ApiModelProperty(value = "是否删除  -1：已删除  0：正常")
     private Integer delFlag;

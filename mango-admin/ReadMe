@@ -7,3 +7,6 @@
 	
 	
 MyBatis Plus的AR（ActiveRecord）模式。即实体类继承Model<实体类>，可直接使用实体类进行基本的CRUD和分页查询操作。
+
+MyBatis Plus的分页插件，在mapper.xml中传入Page参数，可自动实现分页功能
+

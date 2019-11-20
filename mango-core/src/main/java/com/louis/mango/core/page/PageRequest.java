@@ -29,4 +29,15 @@ public class PageRequest {
 	 * 查询参数
 	 */
 	private Map<String, Object> params = new HashMap<>();
+	
+	/***
+	 * 
+	 * @Description 
+	 *	获取单个参数
+	 * @param key
+	 * @return
+	 */
+	public Object getParam(String key) {
+		return getParams().get(key);
+	}
 }

@@ -1,5 +1,7 @@
 package com.louis.mango.admin.dao;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.louis.mango.admin.model.SysRoleMenu;
 
@@ -13,4 +15,7 @@ import com.louis.mango.admin.model.SysRoleMenu;
  */
 public interface SysRoleMenuMapper extends BaseMapper<SysRoleMenu> {
 
+	int deleteByRoleId(@Param("roleId") long roleId); 
+	
+	
 }

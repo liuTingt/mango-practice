@@ -1,10 +1,12 @@
 package com.louis.mango.admin.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
+
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
-import java.io.Serializable;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -50,13 +52,13 @@ public class SysDict implements Serializable {
     private String createBy;
 
     @ApiModelProperty(value = "创建时间")
-    private LocalDateTime createTime;
+    private Date createTime;
 
     @ApiModelProperty(value = "更新人")
     private String lastUpdateBy;
 
     @ApiModelProperty(value = "更新时间")
-    private LocalDateTime lastUpdateTime;
+    private Date lastUpdateTime;
 
     @ApiModelProperty(value = "备注信息")
     private String remarks;

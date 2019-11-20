@@ -1,10 +1,14 @@
 package com.louis.mango.admin.service.ipml;
 
+import org.springframework.stereotype.Service;
+
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.louis.mango.admin.dao.SysLogMapper;
 import com.louis.mango.admin.model.SysLog;
 import com.louis.mango.admin.service.ISysLogService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.stereotype.Service;
+import com.louis.mango.core.page.PageRequest;
 
 /**
  * <p>
@@ -16,5 +20,13 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class SysLogServiceImpl extends ServiceImpl<SysLogMapper, SysLog> implements ISysLogService {
+
+	@Override
+	public IPage<SysLog> findPage(PageRequest pageRequest) {
+		Page<SysLog> page = new Page<SysLog>();
+		page.setCurrent(pageRequest.getPageNum());
+		page.setSize(pageRequest.getPageSize());
+		return this.page(page, null);
+	}
 
 }
