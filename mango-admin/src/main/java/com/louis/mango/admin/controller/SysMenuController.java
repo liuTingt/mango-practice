@@ -4,6 +4,7 @@ package com.louis.mango.admin.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +34,7 @@ public class SysMenuController {
 	@Autowired
 	private ISysMenuService sysMenuService;
 	
+	@PreAuthorize("hasAuthority('sys:menu:add') AND hasAuthority('sys:menu:edit')")
 	@ApiOperation(value = "保存菜单")
 	@PostMapping(value = "/save")
 	public HttpResult save(@RequestBody SysMenu entity) {
@@ -40,18 +42,21 @@ public class SysMenuController {
 		return HttpResult.ok(sysMenuService.saveOrUpdates(entity));
 	}
 	
+	@PreAuthorize("hasAuthority('sys:menu:delete')")
 	@ApiOperation(value = "删除菜单")
 	@PostMapping(value = "/delete")
 	public HttpResult save(@RequestBody List<SysMenu> records) {
 		return HttpResult.ok(sysMenuService.deletes(records));
 	} 
 	
+	@PreAuthorize("hasAuthority('sys:menu:view')")
 	@ApiOperation(value = "查询导航菜单树")
 	@PostMapping(value = "/findNavTree")
 	public HttpResult findNavTree(@RequestParam String userName) {
 		return HttpResult.ok(sysMenuService.findTree(userName, 1));
 	} 
 	
+	@PreAuthorize("hasAuthority('sys:menu:view')")
 	@ApiOperation(value = "查询菜单树")
 	@PostMapping(value = "/findMenuTree")
 	public HttpResult findMenuTree() {

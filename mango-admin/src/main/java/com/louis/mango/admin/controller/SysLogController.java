@@ -4,6 +4,7 @@ package com.louis.mango.admin.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,12 +34,14 @@ public class SysLogController {
 	@Autowired
 	private ISysLogService sysLogService;
 	
+	@PreAuthorize("hasAuthority('sys:log:view')")
 	@ApiOperation(value = "分页查询")
 	@PostMapping(value = "/findPage")
 	public HttpResult findPage(@RequestBody PageRequest pageRequest) {
 		return HttpResult.ok(sysLogService.findPage(pageRequest));
 	} 
 	
+	@PreAuthorize("hasAuthority('sys:log:delete')")
 	@ApiOperation(value = "删除操作日志")
 	@PostMapping(value = "/delete")
 	public HttpResult save(@RequestBody List<SysLog> records) {

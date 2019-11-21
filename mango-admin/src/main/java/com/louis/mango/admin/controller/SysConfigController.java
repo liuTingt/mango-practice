@@ -4,6 +4,7 @@ package com.louis.mango.admin.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,24 +35,28 @@ public class SysConfigController {
 	@Autowired
 	private ISysConfigService sysConfigService;
 	
+	@PreAuthorize("hasAuthority('sys:config:add') AND hasAuthority('sys:user:edit')")
 	@ApiOperation(value = "保存配置")
 	@PostMapping(value = "/save")
 	public HttpResult save(@RequestBody SysConfig entity) {
 		return HttpResult.ok(sysConfigService.saveOrUpdate(entity));
 	}
 	
+	@PreAuthorize("hasAuthority('sys:config:delete')")
 	@ApiOperation(value = "删除字典")
 	@PostMapping(value = "/delete")
 	public HttpResult save(@RequestBody List<SysConfig> records) {
 		return HttpResult.ok(sysConfigService.removeByIds(records));
 	} 
 	
+	@PreAuthorize("hasAuthority('sys:config:view')")
 	@ApiOperation(value = "分页查询")
 	@PostMapping(value = "/findPage")
 	public HttpResult findPage(@RequestBody PageRequest pageRequest) {
 		return HttpResult.ok(sysConfigService.findPage(pageRequest));
 	} 
 	
+	@PreAuthorize("hasAuthority('sys:config:view')")
 	@ApiOperation(value = "根据标签查询")
 	@PostMapping(value = "/findByLabel")
 	public HttpResult findByLabel(@RequestParam String label) {

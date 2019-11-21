@@ -4,6 +4,7 @@ package com.louis.mango.admin.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,18 +33,21 @@ public class SysDeptController {
 	@Autowired
 	private ISysDeptService sysDeptService;
 	
+	@PreAuthorize("hasAuthority('sys:dept:add') AND hasAuthority('sys:dept:edit')")
 	@ApiOperation(value = "保存机构")
 	@PostMapping(value = "/save")
 	public HttpResult save(@RequestBody SysDept entity) {
 		return HttpResult.ok(sysDeptService.save(entity));
 	}
 	
+	@PreAuthorize("hasAuthority('sys:dept:delete')")
 	@ApiOperation(value = "删除机构")
 	@PostMapping(value = "/delete")
 	public HttpResult delete(@RequestBody List<SysDept> records) {
 		return HttpResult.ok();
 	}
 	
+	@PreAuthorize("hasAuthority('sys:dept:view')")
 	@ApiOperation(value = "机构树")
 	@PostMapping(value = "/findTree")
 	public HttpResult findTree() {

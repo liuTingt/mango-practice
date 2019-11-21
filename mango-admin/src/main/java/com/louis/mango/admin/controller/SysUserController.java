@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -54,19 +55,21 @@ public class SysUserController {
 		return sysUserService.findAll2();
 	}
 
-	
+	@PreAuthorize("hasAuthority('sys:user:view')")
 	@PostMapping(value = "/findPage")
 	@ApiOperation(value = "分页查询,系统封装的分页查询方法")
 	public HttpResult findPage(@RequestBody PageRequest pageRequest) {
 		return HttpResult.ok(sysUserService.findPage(pageRequest));
 	}
 	
+	@PreAuthorize("hasAuthority('sys:user:view')")
 	@ApiOperation(value = "Mybatis Plus 分页查询")
 	@PostMapping(value = "/getPage")
 	public HttpResult getPage(@RequestBody PageRequest pageRequest) {
 		return HttpResult.ok(sysUserService.getPage(pageRequest));
 	}
 	
+	@PreAuthorize("hasAuthority('sys:user:add') AND hasAuthority('sys:user:edit')")
 	@ApiOperation(value = "保存用户")
 	@PostMapping(value = "/save")
 	public HttpResult save(@RequestBody SysUser record) {
@@ -100,7 +103,7 @@ public class SysUserController {
 	}
 	
 	
-	
+	@PreAuthorize("hasAuthority('sys:user:edit')")
 	@ApiOperation(value = "删除用户")
 	@PostMapping(value = "/delete")
 	public HttpResult delete(@RequestBody List<SysUser> records) {
@@ -113,20 +116,21 @@ public class SysUserController {
 		return HttpResult.ok(sysUserService.removeByIds(records));
 	}
 	
+	@PreAuthorize("hasAuthority('sys:user:view')")
 	@ApiOperation(value = "根据名称查询用户")
 	@PostMapping(value = "/findByName")
 	public HttpResult findByName(@RequestParam String name) {
 		return HttpResult.ok(sysUserService.findByName(name));
 	}
 	
-	
+	@PreAuthorize("hasAuthority('sys:user:view')")
 	@ApiOperation(value = "查询用户权限")
 	@PostMapping(value = "/findPermissions")
 	public HttpResult findPermissions(@RequestParam String name) {
 		return HttpResult.ok(sysUserService.findPermissions(name));
 	}
 	
-	
+	@PreAuthorize("hasAuthority('sys:user:view')")
 	@ApiOperation(value = "查询用户角色")
 	@PostMapping(value = "/findUserRoles")
 	public HttpResult findUserRoles(@RequestParam Long userId) {
@@ -141,6 +145,7 @@ public class SysUserController {
 	 * @param pageRequest
 	 * @param response
 	 */
+	@PreAuthorize("hasAuthority('sys:user:view')")
 	@ApiOperation(value = "下载文件")
 	@PostMapping(value = "/exportExcelUser")
 	public void exportExcelUser(@RequestBody PageRequest pageRequest, HttpServletResponse response) {
@@ -148,7 +153,7 @@ public class SysUserController {
 		FileUtils.downloadFile(response, file, file.getName());
 	}
 	
-	
+	@PreAuthorize("hasAuthority('sys:user:view')")
 	@ApiOperation(value = "关联查询用户信息")
 	@PostMapping(value = "/extendUserPage")
 	public HttpResult extendUserPage(@RequestBody PageRequest pageRequest) {

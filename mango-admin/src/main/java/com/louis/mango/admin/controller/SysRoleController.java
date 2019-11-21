@@ -4,6 +4,7 @@ package com.louis.mango.admin.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,36 +36,42 @@ public class SysRoleController {
 	@Autowired
 	private ISysRoleService sysRoleService; 
 	
+	@PreAuthorize("hasAuthority('sys:role:add') AND hasAuthority('sys:role:edit')")
 	@ApiOperation(value = "保存角色")
 	@PostMapping(value = "/save")
 	public HttpResult save(@RequestBody SysRole entity) {
 		return HttpResult.ok(sysRoleService.saveOrUpdate(entity));
 	}
 	
+	@PreAuthorize("hasAuthority('sys:role:delete')")
 	@ApiOperation(value = "删除角色")
 	@PostMapping(value = "/delete")
 	public HttpResult delete(@RequestBody List<SysRole> records) {
 		return HttpResult.ok(sysRoleService.removeByIds(records));
 	}
 	
+	@PreAuthorize("hasAuthority('sys:role:view')")
 	@ApiOperation(value = "分页查询")
 	@PostMapping(value = "/findPage")
 	public HttpResult findPage(@RequestBody PageRequest pageRequest) {
 		return HttpResult.ok(sysRoleService.findPage(pageRequest));
 	}
 	
+	@PreAuthorize("hasAuthority('sys:role:view')")
 	@ApiOperation(value = "查询全部")
 	@PostMapping(value = "/findAll")
 	public HttpResult findAll() {
 		return HttpResult.ok(sysRoleService.list());
 	}
 	
+	@PreAuthorize("hasAuthority('sys:role:view')")
 	@ApiOperation(value = "查询角色菜单")
 	@PostMapping(value = "/findRoleMenus")
 	public HttpResult findRoleMenus(@RequestParam Long roleId) {
 		return HttpResult.ok(sysRoleService.findRoleMenus(roleId));
 	}
 	
+	@PreAuthorize("hasAuthority('sys:role:add') AND hasAuthority('sys:role:edit')")
 	@ApiOperation(value = "保存角色菜单")
 	@PostMapping(value = "/saveRoleMenus")
 	public HttpResult saveRoleMenus(@RequestBody List<SysRoleMenu> records) {
