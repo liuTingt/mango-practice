@@ -10,3 +10,4 @@ MyBatis Plus的AR（ActiveRecord）模式。即实体类继承Model<实体类>�
 
 MyBatis Plus的分页插件，在mapper.xml中传入Page参数，可自动实现分页功能
 
+进入Druid监控后台页面：localhost:8002/druid/login.html（账号是在DruidConfig配置中配置的）

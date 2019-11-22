@@ -1,0 +1,14 @@
+# tomcat
+server:
+  port: 8003
+spring:
+  application:
+    name: maongo-backup
+# backup datasource
+mango:
+  backup:
+    datasource:
+      host: localhost
+      userName: root
+      password: root
+      database: mango   
