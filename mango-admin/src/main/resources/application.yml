@@ -2,8 +2,6 @@ server:
   port: 8002
   
   
-  
-  
 #  Druid数据源配置
 spring:
   datasource:
@@ -28,6 +26,12 @@ spring:
       pool-prepared-statements: true
       max-open-prepared-statements: 50
       max-pool-prepared-statement-per-connection-size: 20
+  boot:
+    admin:
+      client:
+        url: "http://localhost:8004"
+  application:
+    name: mongo-admin
 
 
 
@@ -52,5 +56,10 @@ pagehelper:
   supportMethodsArguments: true
 params: count=countSql
     
-      
+# Spring Boot Admin
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
       
