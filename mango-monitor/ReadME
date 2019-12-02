@@ -1,2 +1,3 @@
 版本：Spring Boot2.2.2 + Spring Boot Admin2.1.6(2.1.2)都会存在问题
 先Spring Boot2.1.1 + Spring Boot Admin2.1.1可正确使用
+启动之后访问：localhost:8000

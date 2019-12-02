@@ -7,8 +7,13 @@ spring:
   boot:
     admin:
       client:
-        url: "http://localhost:8004"
-        
+        url: "http://localhost:8000"
+  cloud:
+    consul:
+      host: 127.0.0.1
+      port: 8500
+      discovery:
+        service-name: ${spring.application.name} 
 # backup datasource
 mango:
   backup:
@@ -18,9 +23,14 @@ mango:
       password: root
       database: mango   
       
-# Spring Boot Admin
+# 开放健康检查接口
 management:
   endpoints:
     web:
       exposure:
         include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+      
+   

@@ -29,10 +29,15 @@ spring:
   boot:
     admin:
       client:
-        url: "http://localhost:8004"
+        url: "http://localhost:8000"
   application:
     name: mongo-admin
-
+  cloud:
+    consul:
+      host: 127.0.0.1
+      port: 8500
+      discovery:
+        service-name: ${spring.application.name}   
 
 
 # mybatis-plus配置
@@ -56,10 +61,13 @@ pagehelper:
   supportMethodsArguments: true
 params: count=countSql
     
-# Spring Boot Admin
+# 开放健康检查接口
 management:
   endpoints:
     web:
       exposure:
         include: "*"
+  endpoint:
+    health: 
+      show-details: ALWAYS
       
