@@ -1,6 +1,6 @@
 # tomcat
 server:
-  port: 8003
+  port: 8002
 spring:
   application:
     name: maongo-backup
