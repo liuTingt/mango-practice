@@ -1,0 +1,2 @@
+首先集成了Hystrix Dashboard,使用Hystrix Dashboard可以看到单个应用内的服务信息，
+显然这是不够的，还需要一个工具能让我们汇总系统内多个服务的数据并显示到Hystrix Dashboard上，这个工具就是Turbine
