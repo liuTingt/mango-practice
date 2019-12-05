@@ -1,0 +1,4 @@
+服务消费（Ribbon、Feign）
+Spring Cloud体系里应用比较广泛的服务调用方式有两种：
+1、使用RestTemplate进行服务调用，可以通过Ribbon注解RestTemplate模板，使其拥有负载均衡的功能。
+2、使用Feign进行声明式服务调用，声明之后就像调用本地方法一样，Feign默认使用Ribbon实现负载均衡
