@@ -1,0 +1,33 @@
+server:
+  port: 8005
+spring:
+  application:
+    name: mango-consumer
+  cloud:
+    consul:
+      host: 127.0.0.1
+      port: 8500
+      discovery:
+        service-name: ${spring.application.name}
+  boot:
+    admin:
+      client:
+        url: "http://localhost:8000"
+# 开放健康检查接口
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS 
+# ribbon 负载均衡策略配置，mango-producer为注册服务名
+#mango-producer:
+  #ribbon: 
+    #NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+    
+# 开启熔断器
+feign:
+  hystrix:
+    enabled: true
