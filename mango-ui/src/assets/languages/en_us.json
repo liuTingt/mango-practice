@@ -1,0 +1,12 @@
+{
+    "common": {
+        "home": "Home",
+        "login": "Login",
+        "logout": "Logout",
+        "doc": "Document",
+        "blog": "Blog",
+        "about": "About",
+        "404": "NotFontPage"
+
+    }
+}
