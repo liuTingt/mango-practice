@@ -3,16 +3,15 @@ server:
 spring:
   application:
     name: mango-consumer
-  cloud:
-    consul:
-      host: 127.0.0.1
-      port: 8500
-      discovery:
-        service-name: ${spring.application.name}
   boot:
     admin:
       client:
         url: "http://localhost:8000"
+  zipkin:
+    base-url: http://192.168.99.100:9411/
+    sleuth:
+      sampler:
+        probability: 1 # 样本采集量，默认为0.1，为了测试这里修改为1，正式环境一般使用默认值。
 # 开放健康检查接口
 management:
   endpoints:

@@ -1,0 +1,26 @@
+spring:
+  application: 
+    name: mango-monitor
+  cloud:
+    consul: 
+      host: 127.0.0.1
+      port: 8500
+      discovery:
+        service-name: ${spring.application.name}
+    config:
+      discovery:
+        enabled: true  # 开启服务发现
+        service-id: mango-config  # 配置中心服务名称
+      name: consumer # 对应{application}部分
+      profile: dev # 对应{profile}部分
+      label: master # 对应git的分支，如果配置中心是本地存储，则该参数无用
+  rabbitmq:
+    host: localhsot
+    port: 5672
+    username: guest
+    password: guest
+      
+      
+      
+# 上面这些与spring cloud相关的属性必须配置在bootstrap.yml中，这样config部分内容才能被正确加载，因为
+# config的相关配置会先于application.yml，而boostrap.yml的加载也是先于application.yml文件的
