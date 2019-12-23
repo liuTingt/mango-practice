@@ -5,10 +5,11 @@ spring:
     name: mango-monitor
   cloud:
     consul:
-      host: localhost
+      host: 127.0.0.1
       port: 8500
       discovery:
         service-name: ${spring.application.name} # 注册到consul的服务名
+
         
 # 开放健康检查接口
 management:
