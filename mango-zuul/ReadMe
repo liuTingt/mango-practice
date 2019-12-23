@@ -1,0 +1,20 @@
+服务网关zuul
+	Zuul的核心是一系列的filters，其作用类似Servlet框架中的Filter,Zuul把客户端请求路由到业务处理逻辑的过程中，
+	这些filter在路由的特定时期参与了一些过滤处理，比如实现鉴权、流量转发、请求统计等功能。
+	
+默认路由规则：
+	Spring Cloud Zuul已经帮我们做了默认配置，默认情况下，Zuul会代理所有注册到注册中心的微服务，并且zuul的默认路由
+	规则如下：http://ZUUL_HOST:ZUUL_PORT/微服务在注册中心的serviceId/** 会被转发到serviceId对应的微服务。
+	如果遵循默认路由规则，基本上就没什么配置的了。
+	
+路由熔断：
+	Zuul作为Netflix组件，可以与Ribbon、Eureka和Hystrix等组件相结合，实现负载均衡、熔断器的功能。默认情况下Zuul和Ribbon
+	结合，实现了负载均衡。实现熔断器功能需要实现FallbackProvider接口。实现该接口有两个方法：一个是getRoute()，用于指定
+	熔断器功能应用于哪些路由的服务；另一个方法是fallbackResponse()，为进入熔断器功能时执行的逻辑。
+	创建MyFallbackProvider类。
+	测试：启动之后，访问http://localhost:8010/v1/mango-consumer/ribbon/call可正常访问，停掉mango-consumer
+	服务，再次访问，返回“Sorry, the service is unavailable now.”，自己实现的熔断逻辑
+
+	Zuul作为API服务网关，不用的客户端使用不同的负载均衡将请求统一分发到后端的Zuul，再由Zuul转发到后端服务。为了保证Zuul
+	的高可用性，前端可以同时开启多个Zuul实例进行负载均衡。另外，在Zuul的前端还可以使用Nginx或者F5再次进行负载转发，从而
+	保证Zuul的高可用性。
