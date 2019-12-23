@@ -1,0 +1,33 @@
+server:
+  port: 8020
+spring:
+  application:
+    name: mango-config
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        service-name: ${spring.application.name}
+    config:
+      server:
+        git:
+          uri: https://github.com/liuTingt/spring-cloud-config.git
+          search-paths: config-repo # git仓库下的相对地址，可配置多个，用“，”分割
+          username: liuTingt
+          password: 17839977109lt
+      label: master
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest    
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+        

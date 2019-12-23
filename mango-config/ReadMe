@@ -1,0 +1,4 @@
+Spring Cloud Config 也提供本地存储配置方式，只需要设置spring.profiles.active=natice，
+Cofnig Server会默认从应用的src/main/resource目录下检索配置文件。另外，也可以通过
+spring.cloud.config.server.native.searchLocations=file:D:/properties/属性来指定配置文件
+的位置。
