@@ -12,7 +12,6 @@ import 'font-awesome/css/font-awesome.min.css'
 import i18n from './i18n'
 
 
-
 /**
  * 第一次修改：导入API模块，并通过Vue.use(api)语句进行使用注册，这样可以通过“this.$api.子模块.方法”的方式来调用后台接口
  *            引入global模块，并通过Vue.prototype.global = global语句进行挂载，这样就可以通过“this.global.xx”来获取全局配置

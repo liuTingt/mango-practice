@@ -10,7 +10,8 @@ const i18n = new VueI18n({
     messages: {
         'zh_cn': require('@/assets/languages/zh_cn.json'),
         'en_us': require('@/assets/languages/en_us.json')
-    }
+    },
+    //silentTranslationWarn: true
 })
 
 export default i18n

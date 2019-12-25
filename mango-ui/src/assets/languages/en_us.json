@@ -5,8 +5,14 @@
         "logout": "Logout",
         "doc": "Document",
         "blog": "Blog",
-        "about": "About",
-        "404": "NotFontPage"
+        "projectRepo": "Project",
+        "myMsg": "My Message",
+        "config": "Config",
+        "backup": "Backup",  
+        "restore": "Restore",  
+        "backupRestore": "Backup Restore",  
+        "versionName": "Version",  
+        "exit": "Exit"
 
     }
 }
