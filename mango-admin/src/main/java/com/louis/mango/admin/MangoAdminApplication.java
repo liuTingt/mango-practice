@@ -13,5 +13,6 @@ public class MangoAdminApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MangoAdminApplication.class, args);
 	}
-
+	
+	
 }

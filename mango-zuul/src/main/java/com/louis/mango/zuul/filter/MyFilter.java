@@ -13,6 +13,7 @@ import com.netflix.zuul.exception.ZuulException;
 /***
  * 
  * @Description 
+ * 自定义filter
  *	覆盖run()方法逻辑，在转发请求前进行token认证，如果没有携带token，返回"there is no request token"提示。
  * @author lt
  *
@@ -31,18 +32,19 @@ public class MyFilter extends ZuulFilter{
 		// filter需要执行的具体操作
 		RequestContext ctx = RequestContext.getCurrentContext();
 		HttpServletRequest request = ctx.getRequest();
+		System.out.println("zuul sessionID:" + request.getSession().getId());
 		String token = request.getParameter("token");
 		System.out.println("token:" + token);
-		if(token == null) {
-			ctx.setSendZuulResponse(false);
-			ctx.setResponseStatusCode(401);
-			try {
-				ctx.getResponse().getWriter().write("there is no request token");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			return null;
-		}
+//		if(token == null) {
+//			ctx.setSendZuulResponse(false);
+//			ctx.setResponseStatusCode(401);
+//			try {
+//				ctx.getResponse().getWriter().write("there is no request token");
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//			return null;
+//		}
 		return null;
 	}
 

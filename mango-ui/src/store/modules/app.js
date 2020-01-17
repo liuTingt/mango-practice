@@ -21,7 +21,7 @@ export default {
             state.oldThemeColor = state.themeColor;
             state.themeColor = themeColor;
         },
-        menuRouteloaded(state, menuRouteLoaded) { // 改变菜单和路由得加载状态
+        menuRouteLoaded(state, menuRouteLoaded) { // 改变菜单和路由得加载状态
             state.menuRouteLoaded = menuRouteLoaded;
         }
     },

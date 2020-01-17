@@ -5,7 +5,7 @@ import axios from '../axios'
 
 export const save = (data) => {
     return axios({
-        url: '/user/save',
+        url: '/sys-user/save',
         method: 'post',
         data
     })
@@ -13,7 +13,7 @@ export const save = (data) => {
 
 export const batchDelete = (data) => {
     return axios({
-        url: '/user/delete',
+        url: '/sys-user/delete',
         method: 'post',
         data
     })
@@ -21,7 +21,7 @@ export const batchDelete = (data) => {
 
 export const findPage = (data) => {
     return axios({
-        url: '/user/findPage',
+        url: '/sys-user/findPage',
         method: 'post',
         data
     })
@@ -30,7 +30,17 @@ export const findPage = (data) => {
 // 查找用户的菜单权限标识集合
 export const findPermissions = (params) => {
     return axios({
-        url: '/user/findPermissions',
+        url: '/sys-user/findPermissions',
+        method: 'post',
+        params
+    })
+}
+
+
+// 查找所有用户
+export const findAll = (params) => {
+    return axios({
+        url: '/sys-user/findAll',
         method: 'get',
         params
     })

@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -31,25 +32,24 @@ import io.swagger.annotations.ApiOperation;
 
 /***
  * 
- * @Description 
- *	系统登录相关API
+ * @Description 系统登录相关API
  * @author lt
  *
  */
-@Api(tags = {"系统登录相关API"})
+//@CrossOrigin(allowCredentials = "true")
+@Api(tags = { "系统登录相关API" })
 @RestController
 public class SysLoginController {
 
 	@Autowired
 	private Producer producer;
-	
+
 	@Autowired
 	private ISysUserService sysUserService;
-	
+
 	@Autowired
 	private AuthenticationManager authenticationManager;
-	
-	
+
 	@GetMapping(value = "Kaptcha.jpg")
 	public void kaptcha(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.setHeader("Cache-Control", "no-stroe, no-cache");
@@ -60,39 +60,48 @@ public class SysLoginController {
 		BufferedImage image = producer.createImage(text);
 		// 保存验证码到session
 		request.getSession().setAttribute(Constants.KAPTCHA_SESSION_KEY, text);
+
+		System.out.println("kaptc sessionID:" + request.getSession().getId());
 		ServletOutputStream out = response.getOutputStream();
 		ImageIO.write(image, "jpg", out);
 		IOUtils.closeQuietly(out);
 	}
-	
-	
+
 	@ApiOperation(value = "登录")
 	@PostMapping(value = "/login")
 	public HttpResult login(@RequestBody LoginBean loginBean, HttpServletRequest request) {
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
+				System.out.println("cookie:" + cookie.getName());
+			}
+		}
+
 		String username = loginBean.getAccount();
 		String password = loginBean.getPassword();
 		String captcha = loginBean.getCaptcha();
 		// 从session中获取之前保存的验证码跟前台传来的验证码进行匹配
 		Object kaptcha = request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
-		if(kaptcha == null) {
+		System.out.println("login sessionID:" + request.getSession().getId());
+		if (kaptcha == null) {
 			return HttpResult.error("验证码已失效！");
 		}
-		if(!kaptcha.equals(captcha)) {
+		if (!kaptcha.equals(captcha)) {
 			return HttpResult.error("验证码不正确!");
 		}
-		
 		SysUser user = sysUserService.findByName(username);
-		if(user == null) {
+		if (user == null) {
 			return HttpResult.error("账号不存在");
 		}
-		if(!PasswordUtils.match(user.getSalt(), password, user.getPassword())) {
+		if (!PasswordUtils.match(user.getSalt(), password, user.getPassword())) {
 			return HttpResult.error("密码不正确");
 		}
-		if(user.getStatus() == 0) {
+		if (user.getStatus() == 0) {
 			return HttpResult.error("账号已被锁定，请联系管理员");
 		}
 		// 系统登录认证
 		JwtAuthenticationToken token = SecurityUtils.login(request, username, password, authenticationManager);
 		return HttpResult.ok(token);
 	}
+	
 }

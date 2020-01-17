@@ -4,6 +4,7 @@ package com.louis.mango.admin.controller;
 import java.io.File;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,8 @@ public class SysUserController {
 	
 	@ApiOperation(value = "查询所有")
 	@GetMapping(value = "/findAll")
-	public Object findAll() {
+	public Object findAll(HttpServletRequest request) {
+		System.out.println(request.getSession().getId());
 		return sysUserService.findAll();
 	}
 	

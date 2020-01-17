@@ -21,7 +21,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  *
  */
 @Configuration
-public class WebMvcConfiguration implements WebMvcConfigurer{
+public class CorsConfig implements WebMvcConfigurer{
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -31,15 +31,20 @@ public class WebMvcConfiguration implements WebMvcConfigurer{
 
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
+		System.out.println("*********************************跨域设置被使用**************************");
 		registry.addMapping("/**")// 允许跨域访问的路径
-		.allowedOrigins("*")// 允许跨域访问源
+		.allowedOrigins("http://localhost:8081")// 允许跨域访问源
 		.allowedMethods("POST", "GET", "PUT", "OPTIONS", "DELETE")// 允许请求方法
-		.maxAge(168000)// 预检间隔时间
+		.allowCredentials(true)// 是否发送cookie
 		.allowedHeaders("*")// 允许头部设置
-		.allowCredentials(true);// 是否发送cookie
+		.maxAge(168000)// 预检请求间隔时间
+		;
 	}
 
-
+	/**
+	 * 注意：当withCredentials属性设置为true，需要response header中的'Access-Control-Allow-Origin'为一个确定的域名，
+	 * 	而不能使用'*'这样的通配
+	 */
 	
 	
 }

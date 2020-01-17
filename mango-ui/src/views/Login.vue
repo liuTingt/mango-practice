@@ -33,7 +33,9 @@
 
 <script>
 import Cookies from 'js-cookie';
+import axios from 'axios'
 
+axios.defaults.withCredentials = true;
 
 export default {
   name: 'Login',
@@ -61,25 +63,29 @@ export default {
     login() {
       this.loading = true;
       let userInfo = {account: this.loginForm.account, password: this.loginForm.password, captcha: this.loginForm.captcha};
+
       this.$api.login.login(userInfo).then((res) => {
         if(res.msg != null) {
           this.$message({message: res.msg, type: 'error'})
         } else {
-          Cookies.set('token', res.data.token);
+          Cookies.set('token', res.data.token)
           sessionStorage.setItem('user', userInfo.account); // 保存用户到本地会话
+          this.$store.commit('menuRouteLoaded', false); // 要求重新加载导航菜单
           this.$router.push('/'); // 登录成功，跳转到主页
         }
         this.loading = false;
       }).catch((res) => {
         this.$message({message: res.message, type: 'error'});
       })
+     
     },
     refreshCaptcha: function(){
-      this.loginForm.src = this.global.baseMockUrl + "/captcha.jpg?t=" + new Date().getTime();
+      this.loginForm.src = this.global.baseUrl + "/Kaptcha.jpg?t=" + new Date().getTime();
     },
     reset() {
       this.$refs.loginForm.resetFields()
     }
+    
   },
   mounted() {
     this.refreshCaptcha()

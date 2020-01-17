@@ -11,7 +11,7 @@ spring:
         service-name: ${spring.application.name}
         
 zuul:
-  prefix: /v1   # 给每个服务的API接口加上一个前缀
+  #prefix: /v1   # 给每个服务的API接口加上一个前缀
   routes:
     ribbon:
       path: /ribbon/**
@@ -19,3 +19,5 @@ zuul:
     feign:
       path: /feign/**
       serviceId: mango-consumer  # 转发到消费者 /feign/
+  sensitive-headers: 
+  add-host-header: true

@@ -2,10 +2,13 @@ package com.louis.mango.admin.utils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -69,10 +72,20 @@ public class JwtTokenUtils implements Serializable{
 	 */
 	public static String generateToken(Authentication authentication) {
 		Map<String, Object> claims = new HashMap<String, Object>();
-		claims.put(USERNAME, SecurityUtils.getAuthentication());
+		claims.put(USERNAME, SecurityUtils.getUsername(authentication));
 		claims.put(CREATER, new Date());
-		claims.put(AUTHORITIES, authentication.getAuthorities());
+		//claims.put(AUTHORITIES, authentication.getAuthorities());
+		claims.put(AUTHORITIES, getAuthorities(authentication.getAuthorities()));
 		return generateToken(claims);
+	}
+	
+	public static String getAuthorities(Collection<? extends GrantedAuthority> col) {
+		StringBuilder build = new StringBuilder();
+		for (GrantedAuthority grantedAuthority : col) {
+			build.append(",").append(grantedAuthority.getAuthority());
+		}
+		System.out.println(build.toString().substring(1));
+		return build.toString().substring(1);
 	}
 	
 	/***
@@ -84,7 +97,11 @@ public class JwtTokenUtils implements Serializable{
 	 */
 	public static String generateToken(Map<String, Object> claims) {
 		Date expirationDate = new Date(System.currentTimeMillis() + EXPIRE_TIME);
-		return Jwts.builder().setClaims(claims).setExpiration(expirationDate).signWith(SignatureAlgorithm.HS512, SECRET).compact();
+		return Jwts.builder()
+				.setClaims(claims)
+				.setExpiration(expirationDate)
+				.signWith(SignatureAlgorithm.HS512, SECRET)
+				.compact();
 	}
 	
 	/***
@@ -117,6 +134,7 @@ public class JwtTokenUtils implements Serializable{
 		Authentication authentication = null;
 		// 获取请求携带的令牌
 		String token = getToken(request);
+		//token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImNyZWF0ZXIiOjE1NzgzNzU2MDU5NjIsImV4cCI6MTU3ODQxODgwNSwiYXV0aG9yaXRpZXMiOiJzeXM6bWVudTpkZWxldGUsc3lzOmdlbmVyYXRvcjp2aWV3LHN5czpkaWN0OmVkaXQsc3lzOmRpY3Q6ZGVsZXRlLHN5czpjb25maWc6YWRkLHN5czpzd2FnZ2VyOnZpZXcsc3lzOm1lbnU6YWRkLHN5czp1c2VyOmFkZCxzeXM6ZGVwdDpkZWxldGUsc3lzOnJvbGU6ZWRpdCxzeXM6bG9nOnZpZXcsc3lzOnJvbGU6dmlldyxzeXM6bG9nOmRlbGV0ZSxzeXM6ZGljdDp2aWV3LHN5czp1c2VyOmRlbGV0ZSxzeXM6ZGVwdDp2aWV3LHN5czptb25pdG9yOnZpZXcsc3lzOmRydWlkOnZpZXcsc3lzOm1lbnU6dmlldyxzeXM6ZGljdDphZGQsc3lzOm9ubGluZTp2aWV3LHN5czpyb2xlOmFkZCxzeXM6dXNlcjp2aWV3LHN5czpkZXB0OmVkaXQsc3lzOmxvZ2lubG9nOmRlbGV0ZSxzeXM6Y29uZmlnOmVkaXQsc3lzOmNvbnN1bDp2aWV3LHN5czpsb2dpbmxvZzp2aWV3LHN5czp1c2VyOmVkaXQsc3lzOmNvbmZpZzp2aWV3LHN5czpjb25maWc6ZGVsZXRlLHN5czpkZXB0OmFkZCxzeXM6cm9sZTpkZWxldGUsc3lzOm1lbnU6ZWRpdCJ9.Eu_p6KS2zFcDAQU8RVGsB0fyIyFihlnNL53zMcHSV142UE4GY6Pg8fkJQFmoCnzV1DowiKkW3wN6B-Jhj91ssQ";
 		if(token != null) { // 请求令牌不能为空
 			if(SecurityUtils.getAuthentication() == null) { // 上下文中Authentication为空
 				Claims claims = getClamisFormToken(token);
@@ -132,10 +150,12 @@ public class JwtTokenUtils implements Serializable{
 				}
 				Object authors = claims.get(AUTHORITIES);
 				List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-				if(authors != null && authors instanceof List) {
-					for (Object object: (List<?>)authors) {
-						authorities.add(new GrantedAuthorityImpl((String) ((Map<?,?>) object).get("authority") ) );
-					}
+				if(authors != null) {
+					authorities = Arrays.stream(authors.toString().split(",")).map(GrantedAuthorityImpl::new).collect(Collectors.toList());
+//					String[] authorsArr = authors.toString().split(",");
+//					for (String str: authorsArr) {
+//						authorities.add(new GrantedAuthorityImpl(str));
+//					}
 				}
 				authentication = new JwtAuthenticationToken(userName, null, authorities, token);
 			} else {

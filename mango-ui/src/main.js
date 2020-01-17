@@ -7,10 +7,12 @@ import 'element-ui/lib/theme-chalk/index.css'
 import api from './http'
 import global from '@/utils/global'
 import Router from 'vue-router'
-import './mock/index'
+//import './mock/index'
 import 'font-awesome/css/font-awesome.min.css'
 import i18n from './i18n'
+import axios from 'axios';
 
+axios.defaults.withCredentials=true;
 
 /**
  * 第一次修改：导入API模块，并通过Vue.use(api)语句进行使用注册，这样可以通过“this.$api.子模块.方法”的方式来调用后台接口

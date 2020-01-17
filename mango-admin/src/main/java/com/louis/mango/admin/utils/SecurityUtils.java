@@ -30,7 +30,7 @@ public class SecurityUtils {
 	 * @return
 	 */
 	public static JwtAuthenticationToken login(HttpServletRequest request, String username, String password, AuthenticationManager authenticationManager) {
-		JwtAuthenticationToken token = new JwtAuthenticationToken(username, password);
+		JwtAuthenticationToken token = new JwtAuthenticationToken(username, password);// 自定义token对象
 		token.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 		// 执行登录认证过程
 		Authentication authentication = authenticationManager.authenticate(token);
@@ -48,6 +48,7 @@ public class SecurityUtils {
 	 * @param request
 	 */
 	public static void checkAuthentication(HttpServletRequest request) {
+		//System.out.println("securityUtils sessionID: " + request.getSession().getId());
 		// 获取令牌并根据令牌获取登录认证信息
 		Authentication authentication = JwtTokenUtils.getAuthenticationFromToken(request);
 		// 设置登录认证信息到上下文

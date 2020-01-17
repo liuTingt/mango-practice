@@ -1,6 +1,8 @@
 # tomcat
 server:
   port: 8002
+  servlet:
+    context-path: /backup
 spring:
   application:
     name: maongo-backup
@@ -32,5 +34,4 @@ management:
   endpoint:
     health:
       show-details: ALWAYS
-      
    

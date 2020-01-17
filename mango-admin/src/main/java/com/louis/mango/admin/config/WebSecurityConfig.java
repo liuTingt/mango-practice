@@ -32,7 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Autowired
 	private UserDetailsService userDetailsService;
-
+	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		// 使用自定义验证组件
@@ -51,6 +51,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		.antMatchers("/druid/**").permitAll()
 		// 首页和登录页面
 		.antMatchers("/").permitAll().antMatchers("/login").permitAll()
+		
+		.antMatchers("/sessiontest").permitAll()
+		.antMatchers("/sessiongettest").permitAll()
+		
 		// swagger
 		.antMatchers("/swagger-ui.html").permitAll()
 		.antMatchers("/swagger-resources/**").permitAll()

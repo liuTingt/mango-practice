@@ -27,7 +27,8 @@ public class MyFallbackProvider implements FallbackProvider{
 	@Override
 	public String getRoute() {
 		// 如果需要所有的路由服务都加熔断功能，此处返回 return "*";
-		return "mango-consumer";
+		//return "mango-consumer";
+		return "*";
 	}
 
 	/**
