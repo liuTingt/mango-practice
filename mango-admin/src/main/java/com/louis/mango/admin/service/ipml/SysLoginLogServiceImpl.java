@@ -1,6 +1,7 @@
 package com.louis.mango.admin.service.ipml;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -19,6 +20,7 @@ import com.louis.mango.core.page.PageRequest;
  * @since 2019-10-19
  */
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class SysLoginLogServiceImpl extends ServiceImpl<SysLoginLogMapper, SysLoginLog> implements ISysLoginLogService {
 
 	@Override

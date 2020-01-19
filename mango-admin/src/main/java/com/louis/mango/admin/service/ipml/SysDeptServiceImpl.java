@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.louis.mango.admin.dao.SysDeptMapper;
@@ -19,6 +20,7 @@ import com.louis.mango.admin.service.ISysDeptService;
  * @since 2019-10-19
  */
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> implements ISysDeptService {
 
 	@Override

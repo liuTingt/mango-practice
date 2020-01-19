@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.louis.mango.admin.constant.SysConstants;
@@ -21,6 +22,7 @@ import com.louis.mango.admin.service.ISysMenuService;
  * @since 2019-10-19
  */
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> implements ISysMenuService {
 
 	@Autowired
@@ -61,15 +63,14 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
 		}
 		results.sort((o1, o2) -> o1.getOrderNum().compareTo(o2.getOrderNum()));
 		findChildren(results, menus, menuType);
-		return null;
+		return results;
 	}
 
 	public void findChildren(List<SysMenu> results, List<SysMenu> menus, int menuType) {
 		for (SysMenu parent : results) {
 			List<SysMenu> children = new ArrayList<SysMenu>();
 			for (SysMenu menu : menus) {
-				// ？？？？？？？？？？  怎么能同时即等于1又等于2呢？？？
-				if(menuType == 1 && menuType == 2) {
+				if(menuType == 1 && menu.getType() == 2) {
 					// 如果是获取类型不需要按钮，且菜单类型是按钮的，直接过滤掉
 					continue;
 				}

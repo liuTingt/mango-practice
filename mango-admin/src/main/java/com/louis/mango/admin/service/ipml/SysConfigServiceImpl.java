@@ -3,6 +3,7 @@ package com.louis.mango.admin.service.ipml;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -22,6 +23,7 @@ import com.louis.mango.core.page.PageRequest;
  * @since 2019-11-20
  */
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class SysConfigServiceImpl extends ServiceImpl<SysConfigMapper, SysConfig> implements ISysConfigService {
 
 	

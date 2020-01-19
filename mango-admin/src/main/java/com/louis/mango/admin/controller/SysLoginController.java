@@ -5,7 +5,6 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -70,13 +69,6 @@ public class SysLoginController {
 	@ApiOperation(value = "登录")
 	@PostMapping(value = "/login")
 	public HttpResult login(@RequestBody LoginBean loginBean, HttpServletRequest request) {
-		Cookie[] cookies = request.getCookies();
-		if (cookies != null) {
-			for (Cookie cookie : cookies) {
-				System.out.println("cookie:" + cookie.getName());
-			}
-		}
-
 		String username = loginBean.getAccount();
 		String password = loginBean.getPassword();
 		String captcha = loginBean.getCaptcha();
