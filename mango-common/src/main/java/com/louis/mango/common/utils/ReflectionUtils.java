@@ -59,7 +59,7 @@ public class ReflectionUtils {
 		Method[] methods = clazz.getMethods();
 		for (Method method: methods) {
 			if(method.getName().equals(methodName)) {
-				Class<?>[] parameterTypes = method.getExceptionTypes();
+				Class<?>[] parameterTypes = method.getParameterTypes();
 				if(parameterTypes.length == args.length) {
 					boolean isSameMethod = true;
 					for(int i = 0; i < parameterTypes.length; i++) {
