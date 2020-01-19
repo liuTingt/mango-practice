@@ -27,6 +27,14 @@ export const findPage = (data) => {
     })
 }
 
+export const getPage = (data) => {
+    return axios({
+        url: '/sys-user/getPage',
+        method: 'post',
+        data
+    })
+}
+
 // 查找用户的菜单权限标识集合
 export const findPermissions = (params) => {
     return axios({

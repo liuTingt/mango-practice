@@ -89,6 +89,7 @@ function addDynamicMenuAndRoutes(userName, to, from) {
   api.menu.findNavTree({'userName': userName})
     .then(res => {
       // 添加动态路由
+      console.log(res.data)
       let dynamicRoutes = addDynamicRoutes(res.data)
       router.options.routes[0].children = router.options.routes[0].children.concat(dynamicRoutes)
       router.addRoutes(router.options.routes)
@@ -97,7 +98,7 @@ function addDynamicMenuAndRoutes(userName, to, from) {
       // 保存菜单树
       store.commit('setNavTree', res.data)
     }).then(() => {
-      api.user.findPermissions({'userName': userName}).then(res => {
+      api.user.findPermissions({'name': userName}).then(res => {
         // 保存用户权限标识集合
         store.commit('setPerms', res.data)
       })
@@ -183,8 +184,6 @@ function addDynamicRoutes(menuList = [], routes = []) {
   }
   return routes
 }
-
-
 
 
 export default router

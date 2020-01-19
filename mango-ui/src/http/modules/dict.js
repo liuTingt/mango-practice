@@ -7,7 +7,7 @@ import axios from '../axios'
 // 保存
 export const save = (data) => {
     return axios({
-        url: '/dict/save',
+        url: '/sys-dict/save',
         method: 'post',
         data
     })
@@ -15,7 +15,7 @@ export const save = (data) => {
 // 删除
 export const batchDelete = (data) => {
     return axios({
-        url: '/dict/delete',
+        url: '/sys-dict/delete',
         method: 'post',
         data
     })
@@ -23,7 +23,7 @@ export const batchDelete = (data) => {
 // 分页查询
 export const findPage = (data) => {
     return axios({
-        url: '/dict/findPage',
+        url: '/sys-dict/findPage',
         method: 'post',
         data
     })

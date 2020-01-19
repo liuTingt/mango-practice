@@ -3,7 +3,7 @@ import axios from '../axios'
 // 删除
 export const batchDelete = (data) => {
     return axios({
-        url: '/loginlog/delete',
+        url: '/sys-loginlog/delete',
         method: 'post',
         data
     })
@@ -11,7 +11,7 @@ export const batchDelete = (data) => {
 // 分页查询
 export const findPage = (data) => {
     return axios({
-        url: '/loginlog/findPage',
+        url: '/sys-loginlog/findPage',
         method: 'post',
         data
     })
