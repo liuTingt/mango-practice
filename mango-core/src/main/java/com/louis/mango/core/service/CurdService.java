@@ -52,6 +52,9 @@ public interface CurdService<T> {
 	 * 
 	 * @Description 
 	 * 分页查询
+	 * 	统一封装分页请求和结果，避免直接引入具体框架得分页对象，如MyBatis或JPA得分页对象从而避免因为替换ORM框架而导致服务
+	 * 	层、控制层的分页接口也需要变动的情况，替换ORM框架也不会影响服务层以上得分页接口，起到解耦得作用
+	 * 
 	 * @param pageRequest
 	 * @return
 	 */
