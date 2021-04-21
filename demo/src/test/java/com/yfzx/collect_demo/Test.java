@@ -18,7 +18,9 @@ public class Test {
 		}
 		System.out.println(list.toString());
 		
-	
-		
+		String s1 = "hello";
+		String s2 = "hello";
+		System.out.println(s1 == "hello");
+		System.out.println(s1.substring(0,3) == "hel");
 	}
 }
